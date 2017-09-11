@@ -43,3 +43,27 @@
 
   (testing "Check Rule has list of Calls"
     (is (every? #(instance? Call %) (.calls (transform rr nil))))))
+
+
+(def rf_3 (RawFact. "varon" ["juan"]))
+(def rf_4 (RawFact. "varon" ["pepe"]))
+(def rc_3 (RawCall. "varon" ["x"]))
+(def rc_4 (RawCall. "varon" ["y"]))
+(def rr_2 (RawRule. "varones" ["x","y"] [rc_3, rc_4]))
+(def db (transform_db [rf_3, rf_4, rr_2]))
+(def f (transform rf_3 [rf_3, rf_4]))
+(def r (query db "varones" 2))
+(def calls (.calls r))
+
+(deftest evaluate_fact_test
+  (testing "Evluate Fact"
+    (is (true? (and (evaluate f ["juan"] (ref db))
+                    (evaluate f ["pepe"] (ref db)))))))
+
+(deftest evaluate_call_test
+  (testing "Evaluate Call"
+    (is (every? true? (map #(evaluate % ["juan", "pepe"] (ref db)) calls)))))
+
+(deftest evaluate_rule_test
+  (testing "Evaluate Rule"
+    (is (true? (evaluate r ["pepe","juan"] (ref db))))))
