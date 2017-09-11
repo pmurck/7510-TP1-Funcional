@@ -1,6 +1,5 @@
 (ns parser
-  (:require [clojure.string]
-            [data-defs])
+  (:require [clojure.string])
   (:import (data_defs RawCall RawFact RawRule)))
 
 (def ^:const method_regex #"(\s*\w+\s*)\((\s*[^,\s()]*\s*(?:,\s*[^,\s()]+\s*)*)\)\s*")

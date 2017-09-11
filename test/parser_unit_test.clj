@@ -1,7 +1,6 @@
 (ns parser-unit-test
   (:require [clojure.test :refer :all]
-            [parser :refer :all]
-            [data-defs])
+            [parser :refer :all])
   (:import (data_defs RawFact RawRule RawCall)
            (clojure.lang ExceptionInfo)))
 
