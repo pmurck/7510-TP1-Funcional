@@ -1,4 +1,4 @@
-(ns parser_unit_test
+(ns parser-unit-test
   (:require [clojure.test :refer :all]
             [parser :refer :all]
             [data-defs])
